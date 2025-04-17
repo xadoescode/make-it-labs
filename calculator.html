@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Filament Pricing Calculator</title>
+    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- Favicons -->
+    <link href="assets/img/makeitlabs-icon.ico" rel="icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Montserrat&family=Poppins&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+    <!-- Header -->
+    <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
+            <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+                <h1 class="sitename">MAKE-IT LABS</h1>
+            </a>
+
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li><a href="index.html#hero" class="active">Home</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#portfolio">Portfolio</a></li>
+                    <li><a href="index.html#pricing">Pricing</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li class="dropdown"><a href="#"><span>Printing</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="filaments.html">Filaments</a></li>
+                            <li><a href="howto.html">How to Order With Us</a></li>
+                            <li><a href="calculator.html">Price calculator</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+
+            <a class="btn-getstarted" href="index.html#about">Get Started</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="flex flex-col md:flex-row items-center justify-center min-h-screen pt-20 px-4 space-y-8 md:space-y-0 md:space-x-10">
+
+        <!-- Image -->
+        <div class="w-full md:w-2/3 lg:w-1/2 max-w-xl">
+            <img src="pricing-list.png" class="w-full h-auto rounded-lg shadow-lg">
+        </div>
+
+        <!-- Calculator -->
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full md:w-96 text-center">
+            <h2 class="text-2xl font-bold text-gray-800">Filament Pricing Calculator</h2>
+            <p class="text-gray-600 mt-2">Select filament type and enter weight <br>(in grams).</p>
+
+            <select id="filamentType" class="mt-4 w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <optgroup label="-----GRADUATED PRICING-----">
+                    <option value="pla_matte">PLA MATTE (WHITE, BLACK, GRAY)</option>
+                    <option value="pla_pro">PLA PRO (GREEN)</option>
+                </optgroup>
+                <optgroup label="---------FIXED PRICING----------">
+                    <option value="pla_silk">PLA SILK (BLUE ROSE) (RM0.20/g)</option>
+                    <option value="multi_colour">MULTI-COLOUR PRINT (RM0.18/g)</option>
+                </optgroup>
+            </select>
+
+            <input type="number" id="weightInput" 
+                class="mt-4 w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+                placeholder="Enter weight in grams" oninput="calculatePrice()">
+
+            <button onclick="calculatePrice()"
+                class="mt-4 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition">
+                Calculate
+            </button>
+
+            <div id="result" class="mt-4 text-lg font-semibold text-gray-700"></div>
+            <div id="breakdown" class="mt-2 text-sm text-gray-600"></div>
+        </div>
+
+    </div>
+
+</body>
+</html>
