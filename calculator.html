@@ -29,43 +29,42 @@
 
     <!-- Header -->
     <header id="header" class="header d-flex align-items-center fixed-top">
-        <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
-    
-          <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
-            <h1 class="sitename">MAKE-IT LABS</h1>
-          </a>
-    
-          <nav id="navmenu" class="navmenu">
-            <ul>
-              <li><a href="index.html#hero" class="active">Home</a></li>
-              <li><a href="index.html#about">About</a></li>
-              <li><a href="index.html#services">Services</a></li>
-              <li><a href="index.html#portfolio">Portfolio</a></li>
-              <li><a href="index.html#pricing">Pricing</a></li>
-              <li><a href="blog.html">Blog</a></li>
-              <li class="dropdown"><a href="#"><span>Order</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="filaments.html">Filaments</a></li>
-                  <li><a href="howto.html">How to Order With Us</a></li>
-                  <li><a href="calculator.html">Price calculator</a></li>
-                </ul>
-              </li>
-              <li><a href="index.html#contact">Contact</a></li>
-            </ul>
-            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-          </nav>
-    
-          <a class="btn-getstarted" href="index.html#contact">Order Now!</a>
-    
-        </div>
-      </header>
+      <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
+  
+        <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
+          <h1 class="sitename">MAKE-IT LABS</h1>
+        </a>
+  
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="index.html#hero" class="active">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#portfolio">Portfolio</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li class="dropdown"><a href="#"><span>Get Started</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a href="howto.html">How to Order</a></li>
+                <li><a href="filaments.html">Filaments</a></li>
+                <li><a href="calculator.html">Price calculator</a></li>
+                <li><a href="blog.html">Blog</a></li>
+              </ul>
+            </li>
+          </ul>
+          <i class="mobile-nav-toggle d-lg-none bi bi-list"></i>
+        </nav>
+  
+        <a class="btn-getstarted" href="https://makeitlabs.wasap.my" target="_blank">Order Now!</a>
+  
+      </div>
+    </header>
 
     <!-- Main Content -->
     <div class="flex flex-col md:flex-row items-center justify-center min-h-screen pt-20 px-4 space-y-8 md:space-y-0 md:space-x-10">
 
         <!-- Image -->
         <div class="w-full md:w-2/3 lg:w-1/2 max-w-xl">
-            <img src="pricing-list.png" class="w-full h-auto rounded-lg shadow-lg">
+            <img src="pricing-list-updated.png" class="w-full h-auto rounded-lg shadow-lg">
         </div>
 
         <!-- Calculator -->
@@ -74,13 +73,15 @@
             <p class="text-gray-600 mt-2">Select filament type and enter weight <br>(in grams).</p>
 
             <select id="filamentType" class="mt-4 w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400">
-                <optgroup label="-----GRADUATED PRICING-----">
+                <optgroup label="-----TIERED PRICING-----">
                     <option value="pla_matte">PLA MATTE (WHITE, BLACK, GRAY)</option>
-                    <option value="pla_pro">PLA PRO (RED, ORANGE, GREEN, BLUE, SKY BLUE, TRANSPARENT)</option>
+                    <option value="pla_pro">PLA PRO (RED, ORANGE, PASTEL YELLOW, GREEN, MATCHA GREEN, SKY BLUE, BLUE, PASTEL PURPLE,TRANSPARENT)</option>
+                    <option value="pla_pro">PETG (BLACK)</option>
                 </optgroup>
                 <optgroup label="---------FIXED PRICING----------">
                     <option value="pla_silk">PLA SILK (BLUE ROSE) (RM0.20/g)</option>
-                    <option value="multi_colour">MULTI-COLOUR PRINT (RM0.18/g)</option>
+                    <option value="pla_silk">PLA WOOD (NATURAL WOOD, WALNUT WOOD) (RM0.20/g)</option>
+                    <option value="multi_colour">MULTI-COLOUR PRINT [ONLY FOR PLA MATTE AND PRO SERIES] (RM0.18/g)</option>
                 </optgroup>
             </select>
 

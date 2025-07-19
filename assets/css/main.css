@@ -155,7 +155,7 @@ h6 {
   background: color-mix(in srgb, var(--accent-color), transparent 15%);
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 992px) {
   .header .logo {
     order: 1;
   }
@@ -197,9 +197,10 @@ h6 {
 # Navigation Menu
 --------------------------------------------------------------*/
 /* Navmenu - Desktop */
-@media (min-width: 1200px) {
+@media (min-width: 992px) {
   .navmenu {
     padding: 0;
+    flex-grow: 1;
   }
 
   .navmenu ul {
@@ -208,6 +209,7 @@ h6 {
     display: flex;
     list-style: none;
     align-items: center;
+    justify-content: center;
   }
 
   .navmenu li {
@@ -304,46 +306,41 @@ h6 {
 }
 
 /* Navmenu - Mobile */
-@media (max-width: 1199px) {
+@media (max-width: 991px) {
   .mobile-nav-toggle {
     color: var(--nav-color);
     font-size: 28px;
-    line-height: 0;
-    margin-right: 10px;
     cursor: pointer;
-    transition: color 0.3s;
+    line-height: 0;
+    transition: 0.5s;
   }
 
   .navmenu {
     padding: 0;
-    z-index: 9997;
+    z-index: 9998;
   }
 
   .navmenu ul {
     display: none;
-    list-style: none;
-    position: absolute;
-    inset: 60px 20px 20px 20px;
-    padding: 10px 0;
+    position: fixed;
+    inset: 0;
+    padding: 50px 0 10px 0;
     margin: 0;
-    border-radius: 6px;
-    background-color: var(--nav-mobile-background-color);
+    background: var(--nav-mobile-background-color);
+    flex-direction: column;
     overflow-y: auto;
     transition: 0.3s;
     z-index: 9998;
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
   }
 
   .navmenu a,
   .navmenu a:focus {
-    color: var(--nav-dropdown-color);
     padding: 10px 20px;
-    font-family: var(--nav-font);
-    font-size: 17px;
-    font-weight: 500;
+    font-size: 15px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+    color: var(--nav-dropdown-color);
     white-space: nowrap;
     transition: 0.3s;
   }
@@ -353,20 +350,12 @@ h6 {
     font-size: 12px;
     line-height: 0;
     margin-left: 5px;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
     transition: 0.3s;
-    background-color: color-mix(in srgb, var(--accent-color), transparent 90%);
   }
 
-  .navmenu a i:hover,
-  .navmenu a:focus i:hover {
-    background-color: var(--accent-color);
-    color: var(--contrast-color);
+  .navmenu a i.dropdown-active,
+  .navmenu a:focus i.dropdown-active {
+    transform: rotate(180deg);
   }
 
   .navmenu a:hover,
@@ -375,32 +364,24 @@ h6 {
     color: var(--nav-dropdown-hover-color);
   }
 
-  .navmenu .active i,
-  .navmenu .active:focus i {
-    background-color: var(--accent-color);
-    color: var(--contrast-color);
+  .navmenu .active > i,
+  .navmenu .active:focus > i {
     transform: rotate(180deg);
   }
 
-  .navmenu .dropdown ul {
+  .navmenu .dropdown ul,
+  .navmenu .dropdown .dropdown ul {
     position: static;
     display: none;
-    z-index: 99;
     padding: 10px 0;
     margin: 10px 20px;
-    background-color: var(--nav-dropdown-background-color);
-    border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
-    box-shadow: none;
     transition: all 0.5s ease-in-out;
+    border: 1px solid #dee2e6;
   }
 
-  .navmenu .dropdown ul ul {
-    background-color: rgba(33, 37, 41, 0.1);
-  }
-
-  .navmenu .dropdown>.dropdown-active {
+  .navmenu .dropdown > .dropdown-active,
+  .navmenu .dropdown .dropdown > .dropdown-active {
     display: block;
-    background-color: rgba(33, 37, 41, 0.03);
   }
 
   .mobile-nav-active {
@@ -415,18 +396,23 @@ h6 {
     right: 15px;
     margin-right: 0;
     z-index: 9999;
+    padding: 0;
+    border: 0;
+    background: none;
+    width: 32px;
+    height: 32px;
+  }
+
+  .mobile-nav-active .mobile-nav-toggle:before {
+    content: "\e5cd";
   }
 
   .mobile-nav-active .navmenu {
-    position: fixed;
-    overflow: hidden;
-    inset: 0;
-    background: rgba(33, 37, 41, 0.8);
-    transition: 0.3s;
+    left: 0;
   }
 
-  .mobile-nav-active .navmenu>ul {
-    display: block;
+  .mobile-nav-active .navmenu > ul {
+    display: flex;
   }
 }
 
@@ -1290,7 +1276,7 @@ section,
 # Pricing Section
 --------------------------------------------------------------*/
 .pricing {
-  padding: 60px 0 120px 0;
+  padding: 20px 0 20px 0;
 }
 
 .pricing .section-title {
@@ -1356,7 +1342,7 @@ section,
 }
 
 .pricing h4 {
-  font-size: 48px;
+  font-size: 38px;
   color: var(--accent-color);
   font-weight: 700;
   font-family: var(--heading-font);
@@ -1365,7 +1351,7 @@ section,
 }
 
 .pricing h4 sup {
-  font-size: 28px;
+  font-size: 20px;
 }
 
 .pricing h4 span {
