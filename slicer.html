@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Instant Quotation Estimator - MAKE-IT LABS</title>
+  <meta name="description" content="Online 3D model slicer and cost estimator for 3D printing services from MAKE-IT LABS.">
+  <meta name="keywords" content="3d printing, slicer, estimator, stl viewer, make-it labs, 3d models">
+
+  <!-- Favicons -->
+  <link href="assets/img/makeitlabs-icon.ico" rel="icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    .slicer-page .page-title {
+      padding: 40px 0;
+      background-color: #f8f9fa;
+    }
+
+    .page-title .container {
+      position: relative;
+    }
+
+    .page-title .title-image {
+      position: absolute;
+      top: -50px;
+      right: -40px;
+      width: 430px;
+      opacity: 0.9;
+      z-index: 0;
+    }
+
+    @media (max-width: 768px) {
+      .page-title .title-image {
+        display: none;
+      }
+    }
+    
+    #viewer-container {
+      position: relative;
+      width: 100%;
+      height: 500px;
+      border: 3px dashed #ccc;
+      border-radius: 8px;
+      cursor: grab;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+
+    #viewer-container:active {
+        cursor: grabbing;
+    }
+
+    #drop-zone {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #f1f1f1;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #888;
+        font-size: 1.2rem;
+        transition: background-color 0.3s;
+        z-index: 10;
+        cursor: pointer;
+    }
+
+    #viewer-container.dragover {
+      border-color: #aaa;
+    }
+
+    #viewer-container.dragover #drop-zone {
+        background-color: #e9e9e9;
+    }
+    
+    #file-input {
+        display: none;
+    }
+
+    .form-label {
+        font-weight: 600;
+    }
+
+    #price-breakdown .table {
+        margin-bottom: 0;
+    }
+
+    #price-breakdown .table th {
+        width: 40%;
+    }
+
+    #price-breakdown .card {
+        background-color: #f8f9fa;
+    }
+
+    .loader {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 8px solid #f3f3f3;
+        border-top: 8px solid var(--accent-color);
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        animation: spin 1s linear infinite;
+        z-index: 20;
+    }
+
+    @keyframes spin {
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+  </style>
+</head>
+
+<body class="slicer-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
+        <h1 class="sitename">MAKE-IT LABS</h1>
+      </a>
+      <nav id="navmenu" class="navmenu">
+        <ul>
+            <li><a href="index.html#hero">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#portfolio">Portfolio</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li class="dropdown"><a href="#" class="active"><span>Get Started</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a href="howto.html">How to Order</a></li>
+                <li><a href="filaments.html">Filaments</a></li>
+                <li><a href="calculator.html">Price calculator</a></li>
+                <li><a href="slicer.html">Slicer & Estimator</a></li>
+                <li><a href="blog.html">Blog</a></li>
+              </ul>
+            </li>
+        </ul>
+        <i class="mobile-nav-toggle d-lg-none bi bi-list"></i>
+      </nav>
+      <a class="btn-getstarted" href="https://makeitlabs.wasap.my" target="_blank">Order Now!</a>
+    </div>
+  </header>
+  <br>
+  <br>
+  <br>
+  <br>
+  <main id="main">
+    <div class="page-title" data-aos="fade">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8">
+              <h1>Instant Quotation Calculator</h1>
+              <br>
+              <h4>Upload your 3D model and get a quick price estimate for our printing services!</h4>
+              <br>
+              <p><i>Found the perfect settings in here and ready to order? Take a screenschot of this page and share it with us on <a href="https://makeitlabs.wasap.my" target="_blank" class="alert-link">WhatsApp now!</a></i></p>
+            </div>
+            <img src="assets/img/modelphotos/owltransparent.png" alt="a wise owl" class="title-image d-none d-lg-block">
+          </div>
+          
+        </div>
+    </div><!-- End Page Title -->
+
+    <section id="slicer" class="slicer section">
+      <div class="container" data-aos="fade-up">
+        <div class="row gy-4">
+          
+          <div class="col-lg-7">
+            <div id="viewer-container">
+              <div id="loader" style="display: none;"></div>
+              <div id="drop-zone">
+                <div>
+                    <i class="bi bi-upload fs-1"></i><br>
+                    Drag & drop a .STL file here, or<br>
+                    <button id="upload-button" class="btn btn-primary btn-sm mt-2">Click to Upload</button>
+                </div>
+              </div>
+              <canvas id="viewer-canvas"></canvas>
+            </div>
+            <input type="file" id="file-input" accept=".stl">
+            <p class="text-center text-muted small mt-2"><b>Copyright © MAKE-IT LABS. All rights reserved.</b></p>
+          </div>
+
+          <div class="col-lg-5">
+            <h4>Settings</h4>
+            <div class="card">
+              <div class="card-body">
+                
+                <div class="mb-3">
+                  <label for="layer-height" class="form-label">Layer Height</label>
+                  <select class="form-select" id="layer-height" disabled>
+                    <option value="0.28">0.28 mm (Draft)</option>
+                    <option value="0.20" selected>0.20 mm (Standard)</option>
+                    <option value="0.16">0.16 mm (Fine) (+RM0.30/hr)</option>
+                    <option value="0.12">0.12 mm (Extra Fine) (+RM0.60/hr)</option>
+                    <option value="0.08">0.08 mm (Ultra Fine) (+RM1.00/hr)</option>
+                  </select>
+                  <div id="layer-height-note" class="form-text mt-2" style="display: none;">
+                    Surcharge is based on print time rounded to the nearest hour (e.g., 1hr 31m is billed as 2 hours). No charge for times under 31 minutes.
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="infill-density-slider" class="form-label">Infill Density</label>
+                  <div class="input-group">
+                    <input type="range" class="form-range" id="infill-density-slider" min="5" max="100" step="1" value="20" disabled>
+                    <input type="number" class="form-control" id="infill-density-input" min="10" max="100" value="20" style="max-width: 80px;" disabled>
+                    <span class="input-group-text">%</span>
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label for="filament-type" class="form-label">Filament Type</label>
+                  <select class="form-select" id="filament-type" disabled>
+                    <!-- Options will be populated by JS -->
+                  </select>
+                </div>
+                
+                <div id="price-breakdown" class="mt-4">
+                  <h5>Estimate</h5>
+                  <div class="alert alert-secondary" id="results-placeholder">
+                    Please upload a model to see the estimate.
+                  </div>
+                  <div id="results-container" style="display: none;">
+                    <div class="card p-3">
+                        <div id="est-details">
+                            <!-- JS will populate this -->
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <strong class="h5">Final Price</strong>
+                            <strong class="h5" id="price-final">RM -</strong>
+                        </div>
+                    </div>
+                     <small class="text-muted d-block mt-2">The displayed price is just an estimate. The final price will be confirmed upon confirmation of the `order.</small>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="disclaimer" class="disclaimer-section section-bg py-4">
+      <div class="container">
+        <div class="alert alert-warning mb-0" role="alert">
+          <i class="bi bi-exclamation-triangle-fill"></i> <strong>Disclaimer:</strong> This tool provides an estimated print cost based on standard settings and basic calculations. The final price may vary after slicing the model using our actual 3D printer software (Bambu Studio). This website doesnt not store nor upload any files to any server. Your file remains private at all times. Bugs may occur while loading 3D models as this tool is still in beta development! Please contact us if you encounter any issues.
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="footer" class="footer position-relative light-background">
+
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-5 col-md-12 footer-about">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span class="sitename">MAKE-IT LABS</span>
+          </a>
+          <p>See it. Dream it. Make it.</p>
+          <div class="social-links d-flex mt-4">
+            <a href=""><i class="bi bi-linkedin"></i></a>
+            <a href="https://www.instagram.com/make.it.labs?igsh=b3UxZDVvbWgzcm1h" target="_blank"><i class="bi bi-instagram"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About us</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#portfolio">Portfolio</a></li>
+            <li><a href="index.html#contact">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a>3D Printing</a></li>
+            <li><a>3D Modelling & Design</a></li>
+            <li><a>Consultations</a></li>
+            <li><a>Engineering Prototypes</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+          <h4>Contact Us</h4>
+          <p>Universiti Tenaga Nasional, Kajang 43000</p>
+          <p>Selangor, Malaysia</p>
+          <p class="mt-4"><strong>Phone:</strong> <span>+60 17-650 6278</span></p>
+          <p><strong>Email:</strong> <span>makeitlabs10@gmail.com</span></p>
+          <p><strong>SSM No.:</strong> <span>202503175096 (KT0594227-H)</span></p>
+        </div>
+
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  
+  <!-- three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Page-specific JS -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // --- Constants & State ---
+      const FILAMENTS = [
+        // PLA Matte
+        { name: 'PLA Matte - Black', color: '#2C2C2C', density: 1.25, pricing: 'tiered' },
+        { name: 'PLA Matte - White', color: '#F5F5F5', density: 1.25, pricing: 'tiered' },
+        { name: 'PLA Matte - Gray', color: '#797979', density: 1.25, pricing: 'tiered' },
+        // PLA Pro
+        { name: 'PLA Pro - Red', color: '#ff2222', density: 1.24, pricing: 'tiered' },
+        { name: 'PLA Pro - Orange', color: '#ff770b', density: 1.24, pricing: 'tiered' },
+        { name: 'PLA Pro - Pastel Yellow', color: '#fcff5c', density: 1.24, pricing: 'tiered' },
+        { name: 'PLA Pro - Green', color: '#0acc00', density: 1.24, pricing: 'tiered' },
+        { name: 'PLA Pro - Matcha Green', color: '#aedb5d', density: 1.24, pricing: 'tiered' },
+        { name: 'PLA Pro - Sky Blue', color: '#20f4ff', density: 1.24, pricing: 'tiered' },
+        { name: 'PLA Pro - Blue', color: '#2069ff', density: 1.24, pricing: 'tiered' },
+        { name: 'PLA Pro - Pastel Purple', color: '#db9aff', density: 1.24, pricing: 'tiered' },
+        { name: 'PLA Pro - Transparent', color: '#f3f3f3', density: 1.24, pricing: 'tiered' },
+        // PLA Silk
+        { name: 'PLA Silk - Blue-Rose', color: '#5f00bb', density: 1.20, pricing: 'fixed' },
+        // PLA Wood
+        { name: 'PLA Wood - Natural', color: '#d6ba95', density: 0.7, pricing: 'fixed' },
+        { name: 'PLA Wood - Walnut', color: '#926d3d', density: 0.8, pricing: 'fixed' },
+        // PETG
+        { name: 'PETG - Black', color: '#303030', density: 1.27, pricing: 'tiered' },
+      ];
+
+      const LAYER_HEIGHT_PRICING = {
+        '0.28': 0,
+        '0.20': 0,
+        '0.16': 0.30,
+        '0.12': 0.60,
+        '0.08': 1.00
+      };
+
+      let scene, camera, renderer, controls, model;
+      let modelGeometry = null;
+
+      // --- UI Elements ---
+      const viewerContainer = document.getElementById('viewer-container');
+      const loader = document.getElementById('loader');
+      const dropZone = document.getElementById('drop-zone');
+      const fileInput = document.getElementById('file-input');
+      const uploadButton = document.getElementById('upload-button');
+      
+      const layerHeightSelect = document.getElementById('layer-height');
+      const layerHeightNote = document.getElementById('layer-height-note');
+      const infillSlider = document.getElementById('infill-density-slider');
+      const infillInput = document.getElementById('infill-density-input');
+      const filamentSelect = document.getElementById('filament-type');
+
+      const resultsPlaceholder = document.getElementById('results-placeholder');
+      const resultsContainer = document.getElementById('results-container');
+      const estDetailsEl = document.getElementById('est-details');
+      const priceFinalEl = document.getElementById('price-final');
+
+      // --- Initialization ---
+      function init() {
+        // Populate filament dropdown
+        FILAMENTS.forEach(f => {
+          const option = new Option(f.name, f.name);
+          filamentSelect.add(option);
+        });
+
+        // Setup 3D Scene
+        setupScene();
+
+        // Setup Event Listeners
+        setupEventListeners();
+
+        // Initial render
+        animate();
+      }
+
+      function setupScene() {
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xf1f1f1);
+
+        camera = new THREE.PerspectiveCamera(75, viewerContainer.clientWidth / viewerContainer.clientHeight, 0.1, 1000);
+        camera.position.set(50, 50, 50);
+
+        renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(viewerContainer.clientWidth, viewerContainer.clientHeight);
+        viewerContainer.appendChild(renderer.domElement);
+
+        // Lights
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(1, 1, 1);
+        scene.add(directionalLight);
+
+        // Controls
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.1;
+
+        // Resize handler
+        window.addEventListener('resize', onWindowResize, false);
+      }
+
+      function setupEventListeners() {
+        // File Upload
+        uploadButton.addEventListener('click', (e) => {
+          e.stopPropagation(); // Prevents the dropZone click event from firing as well
+          fileInput.click();
+        });
+        fileInput.addEventListener('change', (e) => handleFile(e.target.files[0]));
+        
+        // Drag and Drop
+        dropZone.addEventListener('click', () => fileInput.click());
+        viewerContainer.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          viewerContainer.classList.add('dragover');
+        });
+        viewerContainer.addEventListener('dragleave', () => viewerContainer.classList.remove('dragover'));
+        viewerContainer.addEventListener('drop', (e) => {
+          e.preventDefault();
+          viewerContainer.classList.remove('dragover');
+          handleFile(e.dataTransfer.files[0]);
+        });
+
+        // Settings change
+        layerHeightSelect.addEventListener('change', () => {
+          const surcharge = LAYER_HEIGHT_PRICING[layerHeightSelect.value] || 0;
+          layerHeightNote.style.display = surcharge > 0 ? 'block' : 'none';
+          updateEstimation();
+        });
+        infillSlider.addEventListener('input', () => {
+          infillInput.value = infillSlider.value;
+          updateEstimation();
+        });
+        infillInput.addEventListener('input', () => {
+          let value = parseInt(infillInput.value, 10);
+          if (isNaN(value)) value = 10;
+          if (value < 10) value = 10;
+          if (value > 100) value = 100;
+          infillInput.value = value;
+          infillSlider.value = value;
+          updateEstimation();
+        });
+        filamentSelect.addEventListener('change', () => {
+            updateModelColor();
+            updateEstimation();
+        });
+      }
+
+      function handleFile(file) {
+        if (!file || !file.name.toLowerCase().endsWith('.stl')) {
+          alert('Please upload a valid .STL file.');
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const contents = event.target.result;
+          const loader = new THREE.STLLoader();
+          const geometry = loader.parse(contents);
+          modelGeometry = geometry;
+          
+          displayModel(geometry);
+          updateEstimation();
+          enableControls();
+        };
+        reader.onerror = () => alert('Failed to read file.');
+        reader.readAsArrayBuffer(file);
+        
+        loader.style.display = 'block';
+        dropZone.style.display = 'none';
+      }
+
+      function displayModel(geometry) {
+        if (model) {
+          scene.remove(model);
+        }
+        
+        geometry.center();
+
+        const selectedFilament = FILAMENTS.find(f => f.name === filamentSelect.value);
+        const material = new THREE.MeshStandardMaterial({
+            color: new THREE.Color(selectedFilament.color),
+            metalness: 0.1,
+            roughness: 0.6,
+        });
+
+        model = new THREE.Mesh(geometry, material);
+        model.rotation.x = -Math.PI / 2; // Reorient from Z-up to Y-up
+        scene.add(model);
+        
+        // Fit camera to model
+        const box = new THREE.Box3().setFromObject(model);
+        const size = box.getSize(new THREE.Vector3());
+        const center = box.getCenter(new THREE.Vector3());
+        const maxSize = Math.max(size.x, size.y, size.z);
+        const fitHeightDistance = maxSize / (2 * Math.atan(Math.PI * camera.fov / 360));
+        const fitWidthDistance = fitHeightDistance / camera.aspect;
+        const distance = 1.2 * Math.max(fitHeightDistance, fitWidthDistance);
+
+        const direction = controls.target.clone().sub(camera.position).normalize().multiplyScalar(distance);
+        controls.maxDistance = distance * 10;
+        controls.target.copy(center);
+        camera.near = distance / 100;
+        camera.far = distance * 100;
+        camera.updateProjectionMatrix();
+        camera.position.copy(controls.target).sub(direction);
+        controls.update();
+
+        loader.style.display = 'none';
+      }
+      
+      function updateModelColor() {
+        if (!model) return;
+        const selectedFilament = FILAMENTS.find(f => f.name === filamentSelect.value);
+        model.material.color.set(selectedFilament.color);
+      }
+
+      function getModelVolume(geometry) {
+        if (!geometry.isBufferGeometry) return 0;
+
+        let position = geometry.attributes.position;
+        let triangles = position.count / 3;
+        let volume = 0;
+        let p1 = new THREE.Vector3(), p2 = new THREE.Vector3(), p3 = new THREE.Vector3();
+
+        for (let i = 0; i < triangles; i++) {
+            p1.fromBufferAttribute(position, i * 3 + 0);
+            p2.fromBufferAttribute(position, i * 3 + 1);
+            p3.fromBufferAttribute(position, i * 3 + 2);
+            volume += p1.x * p2.y * p3.z - p1.x * p3.y * p2.z - p2.x * p1.y * p3.z + p2.x * p3.y * p1.z + p3.x * p1.y * p2.z - p3.x * p2.y * p1.z;
+        }
+        return Math.abs(volume / 6);
+      }
+
+      function updateEstimation() {
+        if (!modelGeometry) return;
+
+        const volumeMm3 = getModelVolume(modelGeometry);
+        if (volumeMm3 === 0) return;
+        const volumeCm3 = volumeMm3 / 1000;
+        
+        const filament = FILAMENTS.find(f => f.name === filamentSelect.value);
+        const infill = parseInt(infillSlider.value, 10);
+        
+        // Heuristic for weight: Assumes a base of 20% for shell, rest is infill.
+        // This is a simplification and not a true slicer calculation.
+        const effectiveVolume = volumeCm3 * (0.2 + 0.8 * (infill / 100));
+        const weight = effectiveVolume * filament.density;
+
+        // Heuristic for time: a factor per gram, adjusted by layer height
+        const layerHeight = parseFloat(layerHeightSelect.value);
+        // Base time: 3 mins per gram at 0.2mm layer height. Thicker layers are faster.
+        const timeHours = (weight * 3 / 60) * (0.2 / layerHeight);
+
+        const totalMinutes = timeHours * 60;
+        const hours = Math.floor(totalMinutes / 60);
+        const minutes = Math.floor(totalMinutes % 60);
+        let timeString;
+        if (hours > 0) {
+            timeString = `${hours}h ${minutes}m`;
+        } else {
+            timeString = `${minutes}m`;
+        }
+
+
+        // Pricing
+        let materialPrice = 0;
+        let breakdownHTML = `
+            <p class="mb-1"><strong>Est. Weight:</strong> ${weight.toFixed(2)} g</p>
+            <p class="mb-2"><strong>Est. Print Time:</strong> ${timeString}</p>
+            <hr class="my-2">
+            <h6 class="mb-2">Material Cost:</h6>
+        `;
+
+        if (filament.pricing === 'tiered') {
+            const tier1Rate = 0.17, tier2Rate = 0.16, tier3Rate = 0.15;
+            let remainingWeight = weight;
+            
+            const tier1Weight = Math.min(remainingWeight, 50);
+            const tier1Cost = tier1Weight * tier1Rate;
+            remainingWeight -= tier1Weight;
+            
+            const tier2Weight = Math.min(remainingWeight, 150); // 200 - 50
+            const tier2Cost = tier2Weight * tier2Rate;
+            remainingWeight -= tier2Weight;
+
+            const tier3Weight = remainingWeight;
+            const tier3Cost = tier3Weight * tier3Rate;
+
+            materialPrice = tier1Cost + tier2Cost + tier3Cost;
+
+            breakdownHTML += `
+                <small class="d-block text-muted">1 - 50g @ RM${tier1Rate.toFixed(2)}/g = RM${tier1Cost.toFixed(2)}</small>
+                <small class="d-block text-muted">51 - 200g @ RM${tier2Rate.toFixed(2)}/g = RM${tier2Cost.toFixed(2)}</small>
+                <small class="d-block text-muted">201g+ @ RM${tier3Rate.toFixed(2)}/g = RM${tier3Cost.toFixed(2)}</small>
+            `;
+
+        } else { // Fixed pricing
+            const rate = 0.18;
+            materialPrice = weight * rate;
+            breakdownHTML += `<small class="d-block text-muted">${weight.toFixed(2)}g @ RM${rate.toFixed(2)}/g = RM${materialPrice.toFixed(2)}</small>`;
+        }
+
+        // Layer Height Surcharge
+        const layerHeightChargePerHour = LAYER_HEIGHT_PRICING[layerHeightSelect.value] || 0;
+        const chargeableHours = Math.round(timeHours);
+        const layerHeightSurcharge = chargeableHours * layerHeightChargePerHour;
+        
+        if (layerHeightSurcharge > 0) {
+            breakdownHTML += `
+                <hr class="my-2">
+                <h6 class="mb-2">Layer Height Surcharge:</h6>
+                <small class="d-block text-muted">${chargeableHours}hr(s) @ RM${layerHeightChargePerHour.toFixed(2)}/hr = RM${layerHeightSurcharge.toFixed(2)}</small>
+            `;
+        }
+        
+        const finalPrice = Math.max(materialPrice + layerHeightSurcharge, 1.00); // Minimum charge of RM 1.00
+
+        // Update UI
+        estDetailsEl.innerHTML = breakdownHTML;
+        priceFinalEl.textContent = `RM ${finalPrice.toFixed(2)}`;
+
+        resultsPlaceholder.style.display = 'none';
+        resultsContainer.style.display = 'block';
+      }
+
+      function enableControls() {
+        layerHeightSelect.disabled = false;
+        infillSlider.disabled = false;
+        infillInput.disabled = false;
+        filamentSelect.disabled = false;
+      }
+      
+      function onWindowResize() {
+        camera.aspect = viewerContainer.clientWidth / viewerContainer.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(viewerContainer.clientWidth, viewerContainer.clientHeight);
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+        controls.update();
+        renderer.render(scene, camera);
+      }
+
+      // --- Start Application ---
+      init();
+    });
+  </script>
+
+</body>
+</html> 
