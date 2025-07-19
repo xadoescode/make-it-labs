@@ -1684,6 +1684,8 @@ section,
 .call-to-action .cta-btn2:hover {
   background: var(--accent-color);
   border: 2px solid var(--accent-color);
+  color: var(--contrast-color);
+  background-color: var(--accent-color);
 }
 /*--------------------------------------------------------------
 # Testimonials Section
