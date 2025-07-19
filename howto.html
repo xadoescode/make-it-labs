@@ -1,59 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>MAKE-IT LABS</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-  
-    <!-- Favicons -->
-    <link href="assets/img/makeitlabs-icon.ico" rel="icon">
-  
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com" rel="preconnect">
-    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-  
-    <!-- Vendor CSS Files -->
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  
-    <!-- Main CSS File -->
-    <link href="assets/css/main.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>How to Order - MAKE-IT LABS</title>
+  <meta name="description" content="Step-by-step guide on how to order 3D printing services from MAKE-IT LABS.">
+  <meta name="keywords" content="3d printing, order, how to, make-it labs, 3d models">
+
+  <!-- Favicons -->
+  <link href="assets/img/makeitlabs-icon.ico" rel="icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
   <style>
-    body {
-      margin: 0;
-      background-color: white;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /*--------------------------------------------------------------
+    # How to Order Page
+    --------------------------------------------------------------*/
+    .page-title {
+      padding: 40px 0;
+      background-color: #f8f9fa;
     }
 
-    header {
-      background-color: #003053;
-      color: white;
-      padding: 1rem 2rem;
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-
-    .pdf-container {
-      height: calc(100vh - 70px); /* subtract header height */
-      width: 100%;
-    }
-
-    iframe {
-      width: 100%;
-      height: 100%;
+    .how-to-order .step-card {
       border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease-in-out;
+      height: 100%;
+      background: #fff;
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+    }
+
+    .how-to-order .step-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .how-to-order .step-number {
+      position: absolute;
+      top: 15px;
+      left: 20px;
+      font-size: 4rem;
+      font-weight: 700;
+      color: #e9ecef;
+      z-index: 1;
+    }
+
+    .how-to-order .step-content {
+      position: relative;
+      z-index: 2;
+      margin-left: 40px;
+    }
+
+    .how-to-order .step-icon {
+      font-size: 3rem;
+      color: var(--accent-color);
+      margin-bottom: 15px;
+    }
+    
+    .how-to-order .card-title {
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+
+    .how-to-order .btn-whatsapp {
+      background-color: #25D366;
+      border-color: #25D366;
+    }
+
+    .how-to-order .btn-whatsapp:hover {
+      background-color: #1DA851;
+      border-color: #1DA851;
+    }
+
+    .how-to-order .btn-email {
+      background-color: #858585;
+      border-color: #858585;
+      color: #fff;
+    }
+
+    .how-to-order .btn-email:hover {
+      background-color: #363636;
+      border-color: #262626;
+    }
+
+    .how-to-order .btn {
+      margin-top: 15px;
+    }
+
+    .notes-section .alert {
+        margin-bottom: 20px;
+    }
+
+    .page-title .container {
+      position: relative;
+    }
+
+    .page-title .title-image {
+      position: absolute;
+      top: -80px;
+      right: 50px;
+      width: 330px;
+      opacity: 0.9;
+      z-index: 0;
+    }
+
+    @media (max-width: 768px) {
+      .page-title .title-image {
+        display: none;
+      }
     }
   </style>
 </head>
 
-<body>
+<body class="howto-page">
+
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
 
@@ -63,12 +141,12 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="index.html#hero" class="active">Home</a></li>
+          <li><a href="index.html#hero">Home</a></li>
           <li><a href="index.html#about">About</a></li>
           <li><a href="index.html#services">Services</a></li>
           <li><a href="index.html#portfolio">Portfolio</a></li>
           <li><a href="index.html#contact">Contact</a></li>
-          <li class="dropdown"><a href="#"><span>Get Started</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li class="dropdown"><a href="#" class="active"><span>Get Started</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="howto.html">How to Order</a></li>
               <li><a href="filaments.html">Filaments</a></li>
@@ -84,12 +162,142 @@
 
     </div>
   </header>
-  
+
+  <main id="main">
     <br>
     <br>
-  <div class="pdf-container">
-    <iframe src="howto.pdf#zoom=90"></iframe>
-  </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            
+            <h1>How to Order</h1>
+            <p>Follow these simple steps to bring your 3D creations to life with us.</p>
+          </div>
+        </div>
+        <img src="assets/img/modelphotos/creeper.png" alt="Decorative Spider" class="title-image d-none d-lg-block">
+      </div>
+    </div><!-- End Page Title -->
+
+    <!-- How to Order Section -->
+    <section id="how-to-order" class="how-to-order section">
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <!-- Step 1 -->
+          <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="step-card">
+              <span class="step-number">1</span>
+              <div class="step-content">
+                <i class="bi bi-file-earmark-arrow-up step-icon"></i>
+                <h3 class="card-title">Submit Your Design</h3>
+                <p>Send us your 3D model file (e.g., .STL, .OBJ) and your printing requirements via WhatsApp or Email. Don't have a design? We can help with that too!</p>
+                <a href="https://makeitlabs.wasap.my" class="btn btn-primary btn-whatsapp" target="_blank"><i class="bi bi-whatsapp"></i> WhatsApp Us</a>
+                <a href="mailto:makeitlabs10@gmail.com" class="btn btn-secondary btn-email"><i class="bi bi-envelope"></i> Email Us</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="step-card">
+              <span class="step-number">2</span>
+              <div class="step-content">
+                <i class="bi bi-card-checklist step-icon"></i>
+                <h3 class="card-title">Review Your Quote</h3>
+                <p>We will analyze your design and send you a detailed quote, including the estimated cost and completion time, typically within a few business hours or in the same day.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="step-card">
+              <span class="step-number">3</span>
+              <div class="step-content">
+                <i class="bi bi-credit-card step-icon"></i>
+                <h3 class="card-title">Confirm &amp; Pay</h3>
+                <p>Once you approve the quote, you can confirm your order by making the payment. We'll get the printers running as soon as it's confirmed.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="step-card">
+              <span class="step-number">4</span>
+              <div class="step-content">
+                <i class="bi bi-box-seam step-icon"></i>
+                <h3 class="card-title">Printing &amp; Delivery</h3>
+                <p>Your design will be printed with precision and care. We'll notify you once it's ready for pickup or and the further details for delivery.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End How to Order Section -->
+
+    <!-- Notes Section -->
+    <section id="notes" class="notes-section section-bg">
+      <div class="container">
+        <div class="section-title" data-aos="fade-up">
+          <h2>Good to Know</h2>
+          <p>A few important things to note before you order.</p>
+        </div>
+        <div class="row">
+          <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
+            
+            <div class="alert alert-light" role="alert">
+              <h4 class="alert-heading"><i class="bi bi-info-circle-fill"></i> File Formats</h4>
+              <p>We primarily accept <strong>.STL, .OBJ, and .3MF</strong> files. If you have a different format, please contact us, and we'll see what we can do.</p>
+            </div>
+            
+            <div class="alert alert-light" role="alert">
+              <h4 class="alert-heading"><i class="bi bi-palette-fill"></i> Materials &amp; Colors</h4>
+              <p>We offer a wide range of materials and colors to suit your project needs. Head over to our <a href="filaments.html" class="alert-link">Filaments page</a> to explore the options.</p>
+            </div>
+            
+            <div class="alert alert-light" role="alert">
+              <h4 class="alert-heading"><i class="bi bi-clock-history"></i> Turnaround Time</h4>
+              <p>Standard orders are typically completed within 1-5 business days. This can vary depending on the complexity, size, and our current order queue. We will provide a more precise estimate in your quote.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section> <!-- End Notes Section -->
+
+    <!-- Customization Section -->
+    <section id="customization" class="customization-section section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Customization &amp; Advanced Settings</h2>
+          <p>Learn about our printing standards and how to customize your order.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="alert alert-info" role="alert">
+              <h4 class="alert-heading"><i class="bi bi-sliders"></i> Tailor Your Prints</h4>
+              <p>We use optimized default settings for a balance of speed and quality. However, you can request specific adjustments like layer height, infill density, and patterns. For detailed information on these options, please <a href="howto.pdf" class="alert-link" target="_blank">review our technical guide</a> or let us know your requirements when ordering.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Customization Section -->
+
+  </main>
+
   <footer id="footer" class="footer position-relative light-background">
 
     <div class="container footer-top">
@@ -123,7 +331,6 @@
             <li><a>3D Modelling & Design</a></li>
             <li><a>Consultations</a></li>
             <li><a>Engineering Prototypes</a></li>
-            
           </ul>
         </div>
 
@@ -139,7 +346,27 @@
       </div>
     </div>
 
-
   </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
 </body>
+
 </html>
