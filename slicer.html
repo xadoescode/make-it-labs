@@ -104,6 +104,11 @@
     .form-label {
         font-weight: 600;
     }
+    
+    .form-label i {
+      color: var(--accent-color);
+      opacity: 0.9;
+    }
 
     #price-breakdown .table {
         margin-bottom: 0;
@@ -134,6 +139,68 @@
     @keyframes spin {
         0% { transform: translate(-50%, -50%) rotate(0deg); }
         100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    /* New styles for settings UI */
+    .slicer-page .col-lg-5 .card .nav-pills .nav-link {
+        background-color: #f1f1f1;
+        color: #333;
+        border: 0;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .slicer-page .col-lg-5 .card .nav-pills .nav-link.active {
+        background-color: var(--accent-color);
+        color: white;
+    }
+    
+    .presets-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 0.75rem;
+    }
+
+    .presets-grid .preset-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 5px;
+        height: 85px;
+        font-size: 0.9rem;
+        border-width: 1px;
+        border-radius: 0.5rem;
+        background-color: #fff;
+        border: 1px solid #dee2e6;
+        transition: all 0.2s ease-in-out;
+    }
+    
+    .presets-grid .preset-btn i {
+        transition: transform 0.2s ease-in-out;
+    }
+    
+    .presets-grid .preset-btn:hover i {
+        transform: scale(1.1);
+    }
+
+    .presets-grid .preset-btn.active {
+        background-color: var(--accent-color);
+        color: white;
+        border-color: var(--accent-color);
+        box-shadow: 0 4px 15px -5px var(--accent-color);
+    }
+
+    .presets-grid .preset-btn:hover:not(.active) {
+        background-color: #f8f9fa;
+        border-color: #adb5bd;
+    }
+    
+    #custom-pane {
+        min-height: 85px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
   </style>
@@ -199,49 +266,90 @@
               <div id="drop-zone">
                 <div>
                     <i class="bi bi-upload fs-1"></i><br>
-                    Drag & drop a .STL file here, or<br>
+                    Drag & drop a .STL or .OBJ file here, or<br>
                     <button id="upload-button" class="btn btn-primary btn-sm mt-2">Click to Upload</button>
                 </div>
               </div>
               <canvas id="viewer-canvas"></canvas>
             </div>
-            <input type="file" id="file-input" accept=".stl">
+            <input type="file" id="file-input" accept=".stl,.obj">
             <p class="text-center text-muted small mt-2"><b>Copyright © MAKE-IT LABS. All rights reserved.</b></p>
           </div>
 
           <div class="col-lg-5">
-            <h4>Settings</h4>
+            <h4>Print Settings</h4>
             <div class="card">
               <div class="card-body">
                 
-                <div class="mb-3">
-                  <label for="layer-height" class="form-label">Layer Height</label>
-                  <select class="form-select" id="layer-height" disabled>
-                    <option value="0.28">0.28 mm (Draft)</option>
-                    <option value="0.20" selected>0.20 mm (Standard)</option>
-                    <option value="0.16">0.16 mm (Fine) (+RM0.30/hr)</option>
-                    <option value="0.12">0.12 mm (Extra Fine) (+RM0.60/hr)</option>
-                    <option value="0.08">0.08 mm (Ultra Fine) (+RM1.00/hr)</option>
-                  </select>
-                  <div id="layer-height-note" class="form-text mt-2" style="display: none;">
-                    Surcharge is based on print time rounded to the nearest hour (e.g., 1hr 31m is billed as 2 hours). No charge for times under 31 minutes.
+                <!-- Tabs: Presets / Custom -->
+                <ul class="nav nav-pills nav-fill mb-3" id="settings-tabs" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="presets-tab-btn" data-bs-toggle="tab" data-bs-target="#presets-pane" type="button" role="tab" aria-controls="presets-pane" aria-selected="true">Presets</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="custom-tab-btn" data-bs-toggle="tab" data-bs-target="#custom-pane" type="button" role="tab" aria-controls="custom-pane" aria-selected="false">Custom</button>
+                  </li>
+                </ul>
+
+                <!-- Tab Content -->
+                <div class="tab-content" id="settings-tabs-content">
+                  <div class="tab-pane fade show active" id="presets-pane" role="tabpanel">
+                    <div class="presets-grid">
+                      <button class="btn preset-btn" data-preset="balanced">
+                        <i class="bi bi-sliders d-block fs-4 mb-2"></i>
+                        <strong>Balanced</strong>
+                      </button>
+                      <button class="btn preset-btn" data-preset="visual">
+                        <i class="bi bi-gem d-block fs-4 mb-2"></i>
+                        <strong>Visual</strong>
+                      </button>
+                      <button class="btn preset-btn" data-preset="engineering">
+                        <i class="bi bi-gear d-block fs-4 mb-2"></i>
+                        <strong>Engineering</strong>
+                      </button>
+                      <button class="btn preset-btn" data-preset="draft">
+                        <i class="bi bi-pencil-square d-block fs-4 mb-2"></i>
+                        <strong>Draft</strong>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="tab-pane fade" id="custom-pane" role="tabpanel">
+                     <p class="text-muted text-center m-0">Modify the settings below to create a custom profile.</p>
                   </div>
                 </div>
 
-                <div class="mb-3">
-                  <label for="infill-density-slider" class="form-label">Infill Density</label>
-                  <div class="input-group">
-                    <input type="range" class="form-range" id="infill-density-slider" min="5" max="100" step="1" value="20" disabled>
-                    <input type="number" class="form-control" id="infill-density-input" min="10" max="100" value="20" style="max-width: 80px;" disabled>
-                    <span class="input-group-text">%</span>
+                <hr class="mt-2 mb-4">
+
+                <div id="custom-settings-container">
+                  <div class="mb-3">
+                    <label for="layer-height" class="form-label"><i class="bi bi-layers me-2"></i>Layer Height</label>
+                    <select class="form-select" id="layer-height" disabled>
+                      <option value="0.28">0.28 mm (Draft)</option>
+                      <option value="0.20" selected>0.20 mm (Standard)</option>
+                      <option value="0.16">0.16 mm (Fine)</option>
+                      <option value="0.12">0.12 mm (Extra Fine)</option>
+                      <option value="0.08">0.08 mm (Ultra Fine)</option>
+                    </select>
+                    <div id="layer-height-note" class="form-text mt-2" style="display: none;">
+                      Surcharge is based on print time rounded to the nearest hour (e.g., 1hr 31m is billed as 2 hours). No charge for times under 31 minutes.
+                    </div>
                   </div>
-                </div>
-                
-                <div class="mb-3">
-                  <label for="filament-type" class="form-label">Filament Type</label>
-                  <select class="form-select" id="filament-type" disabled>
-                    <!-- Options will be populated by JS -->
-                  </select>
+  
+                  <div class="mb-3">
+                    <label for="infill-density-slider" class="form-label"><i class="bi bi-grid-3x3-gap me-2"></i>Infill Density</label>
+                    <div class="input-group">
+                      <input type="range" class="form-range" id="infill-density-slider" min="5" max="100" step="1" value="20" disabled>
+                      <input type="number" class="form-control" id="infill-density-input" min="5" max="100" value="20" style="max-width: 80px;" disabled>
+                      <span class="input-group-text">%</span>
+                    </div>
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label for="filament-type" class="form-label"><i class="bi bi-palette-fill me-2"></i>Filament Type</label>
+                    <select class="form-select" id="filament-type" disabled>
+                      <!-- Options will be populated by JS -->
+                    </select>
+                  </div>
                 </div>
                 
                 <div id="price-breakdown" class="mt-4">
@@ -274,7 +382,7 @@
     <section id="disclaimer" class="disclaimer-section section-bg py-4">
       <div class="container">
         <div class="alert alert-warning mb-0" role="alert">
-          <i class="bi bi-exclamation-triangle-fill"></i> <strong>Disclaimer:</strong> This tool provides an estimated print cost based on standard settings and basic calculations. The final price may vary after slicing the model using our actual 3D printer software (Bambu Studio). This website doesnt not store nor upload any files to any server. Your file remains private at all times. Bugs may occur while loading 3D models as this tool is still in beta development! Please contact us if you encounter any issues.
+          <i class="bi bi-exclamation-triangle-fill"></i> <strong>Disclaimer:</strong> This tool provides an estimated print cost based on standard settings and mathematical calculations. The final price may vary after slicing the model using our actual 3D printer software (Bambu Studio). This website doesnt not store nor upload any files to any server. Your file remains private at all times. Bugs may occur while loading 3D models as this tool is still in beta development! Please contact us if you encounter any issues.
 
         </div>
       </div>
@@ -345,6 +453,8 @@
   <!-- three.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/utils/BufferGeometryUtils.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 
   <!-- Main JS File -->
@@ -371,10 +481,10 @@
         { name: 'PLA Pro - Pastel Purple', color: '#db9aff', density: 1.24, pricing: 'tiered' },
         { name: 'PLA Pro - Transparent', color: '#f3f3f3', density: 1.24, pricing: 'tiered' },
         // PLA Silk
-        { name: 'PLA Silk - Blue-Rose', color: '#5f00bb', density: 1.20, pricing: 'fixed' },
+        { name: 'PLA Silk - Blue-Rose', color: '#5f00bb', density: 1.24, pricing: 'fixed' },
         // PLA Wood
-        { name: 'PLA Wood - Natural', color: '#d6ba95', density: 0.7, pricing: 'fixed' },
-        { name: 'PLA Wood - Walnut', color: '#926d3d', density: 0.8, pricing: 'fixed' },
+        { name: 'PLA Wood - Natural', color: '#d6ba95', density: 1.2, pricing: 'fixed' },
+        { name: 'PLA Wood - Walnut', color: '#926d3d', density: 1.2, pricing: 'fixed' },
         // PETG
         { name: 'PETG - Black', color: '#303030', density: 1.27, pricing: 'tiered' },
       ];
@@ -386,9 +496,17 @@
         '0.12': 0.60,
         '0.08': 1.00
       };
+      
+      const PRESETS = {
+        balanced: { layerHeight: '0.20', infill: 12 },
+        visual: { layerHeight: '0.08', infill: 7 },
+        engineering: { layerHeight: '0.16', infill: 15 },
+        draft: { layerHeight: '0.28', infill: 5 }
+      };
 
       let scene, camera, renderer, controls, model;
       let modelGeometry = null;
+      let activePreset = null;
 
       // --- UI Elements ---
       const viewerContainer = document.getElementById('viewer-container');
@@ -407,6 +525,9 @@
       const resultsContainer = document.getElementById('results-container');
       const estDetailsEl = document.getElementById('est-details');
       const priceFinalEl = document.getElementById('price-final');
+      
+      const presetButtons = document.querySelectorAll('.preset-btn');
+      const customTabBtn = new bootstrap.Tab(document.getElementById('custom-tab-btn'));
 
       // --- Initialization ---
       function init() {
@@ -474,77 +595,163 @@
           handleFile(e.dataTransfer.files[0]);
         });
 
-        // Settings change
+        // Settings change listeners
+        const manualInputs = [layerHeightSelect, infillSlider, infillInput];
+        manualInputs.forEach(input => {
+            input.addEventListener('input', () => {
+                switchToCustom();
+                updateEstimation();
+            });
+        });
+
         layerHeightSelect.addEventListener('change', () => {
           const surcharge = LAYER_HEIGHT_PRICING[layerHeightSelect.value] || 0;
           layerHeightNote.style.display = surcharge > 0 ? 'block' : 'none';
-          updateEstimation();
         });
-        infillSlider.addEventListener('input', () => {
-          infillInput.value = infillSlider.value;
-          updateEstimation();
-        });
+
+        infillSlider.addEventListener('input', () => infillInput.value = infillSlider.value);
         infillInput.addEventListener('input', () => {
           let value = parseInt(infillInput.value, 10);
-          if (isNaN(value)) value = 10;
-          if (value < 10) value = 10;
+          if (isNaN(value)) value = 5;
+          if (value < 5) value = 5;
           if (value > 100) value = 100;
           infillInput.value = value;
           infillSlider.value = value;
-          updateEstimation();
         });
+        
         filamentSelect.addEventListener('change', () => {
             updateModelColor();
             updateEstimation();
         });
+        
+        // Preset buttons
+        presetButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const presetName = btn.dataset.preset;
+                applyPreset(presetName);
+            });
+        });
+      }
+      
+      function applyPreset(presetName) {
+        if (!PRESETS[presetName]) return;
+        
+        activePreset = presetName;
+        const { layerHeight, infill } = PRESETS[presetName];
+        
+        // Update controls
+        layerHeightSelect.value = layerHeight;
+        infillSlider.value = infill;
+        infillInput.value = infill;
+        
+        // Update UI
+        presetButtons.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.preset === presetName);
+        });
+        
+        // Trigger dependent updates
+        const changeEvent = new Event('change', { bubbles: true });
+        layerHeightSelect.dispatchEvent(changeEvent); // To update surcharge note
+        
+        updateEstimation();
+      }
+      
+      function switchToCustom() {
+        if (activePreset) {
+            activePreset = null;
+            presetButtons.forEach(btn => btn.classList.remove('active'));
+            customTabBtn.show();
+        }
       }
 
       function handleFile(file) {
-        if (!file || !file.name.toLowerCase().endsWith('.stl')) {
-          alert('Please upload a valid .STL file.');
+        const validExtensions = ['stl', 'obj'];
+        const fileExt = file.name.split('.').pop().toLowerCase();
+
+        if (!file || !validExtensions.includes(fileExt)) {
+          alert('Please upload a valid .STL or .OBJ file.');
           return;
         }
 
         const reader = new FileReader();
+        
         reader.onload = (event) => {
           const contents = event.target.result;
-          const loader = new THREE.STLLoader();
-          const geometry = loader.parse(contents);
-          modelGeometry = geometry;
+          let loader;
+          let loadedObject;
           
-          displayModel(geometry);
+          try {
+            switch (fileExt) {
+              case 'stl':
+                loader = new THREE.STLLoader();
+                const geometry = loader.parse(contents);
+                modelGeometry = geometry;
+                loadedObject = new THREE.Mesh(geometry);
+                break;
+              case 'obj':
+                loader = new THREE.OBJLoader();
+                loadedObject = loader.parse(contents);
+                break;
+            }
+          } catch (error) {
+            alert(`Error parsing file: ${error.message}`);
+            document.getElementById('loader').style.display = 'none';
+            dropZone.style.display = 'flex';
+            return;
+          }
+          
+          if (fileExt !== 'stl') {
+              const geometries = [];
+              loadedObject.traverse(child => {
+                  if (child.isMesh) {
+                      geometries.push(child.geometry);
+                  }
+              });
+
+              if (geometries.length > 0) {
+                  modelGeometry = THREE.BufferGeometryUtils.mergeBufferGeometries(geometries);
+              } else {
+                  alert('No geometry found in the model.');
+                  document.getElementById('loader').style.display = 'none';
+                  dropZone.style.display = 'flex';
+                  return;
+              }
+          }
+
+          displayModel(loadedObject);
           updateEstimation();
           enableControls();
         };
         reader.onerror = () => alert('Failed to read file.');
-        reader.readAsArrayBuffer(file);
         
-        loader.style.display = 'block';
+        document.getElementById('loader').style.display = 'block';
         dropZone.style.display = 'none';
+
+        if (fileExt === 'obj') {
+            reader.readAsText(file);
+        } else { // stl
+            reader.readAsArrayBuffer(file);
+        }
       }
 
-      function displayModel(geometry) {
+      function displayModel(object) {
         if (model) {
           scene.remove(model);
         }
+        model = object;
+
+        updateModelColor();
         
-        geometry.center();
+        const box = new THREE.Box3().setFromObject(model);
+        const center = box.getCenter(new THREE.Vector3());
+        model.position.sub(center);
 
-        const selectedFilament = FILAMENTS.find(f => f.name === filamentSelect.value);
-        const material = new THREE.MeshStandardMaterial({
-            color: new THREE.Color(selectedFilament.color),
-            metalness: 0.1,
-            roughness: 0.6,
-        });
-
-        model = new THREE.Mesh(geometry, material);
         model.rotation.x = -Math.PI / 2; // Reorient from Z-up to Y-up
         scene.add(model);
         
-        // Fit camera to model
-        const box = new THREE.Box3().setFromObject(model);
-        const size = box.getSize(new THREE.Vector3());
-        const center = box.getCenter(new THREE.Vector3());
+        const newBox = new THREE.Box3().setFromObject(model);
+        const size = newBox.getSize(new THREE.Vector3());
+        const newCenter = newBox.getCenter(new THREE.Vector3());
         const maxSize = Math.max(size.x, size.y, size.z);
         const fitHeightDistance = maxSize / (2 * Math.atan(Math.PI * camera.fov / 360));
         const fitWidthDistance = fitHeightDistance / camera.aspect;
@@ -552,20 +759,31 @@
 
         const direction = controls.target.clone().sub(camera.position).normalize().multiplyScalar(distance);
         controls.maxDistance = distance * 10;
-        controls.target.copy(center);
+        controls.target.copy(newCenter);
         camera.near = distance / 100;
         camera.far = distance * 100;
         camera.updateProjectionMatrix();
         camera.position.copy(controls.target).sub(direction);
         controls.update();
 
-        loader.style.display = 'none';
+        document.getElementById('loader').style.display = 'none';
       }
       
       function updateModelColor() {
         if (!model) return;
         const selectedFilament = FILAMENTS.find(f => f.name === filamentSelect.value);
-        model.material.color.set(selectedFilament.color);
+        const newColor = new THREE.Color(selectedFilament.color);
+        const newMaterial = new THREE.MeshStandardMaterial({
+            color: newColor,
+            metalness: 0.1,
+            roughness: 0.6,
+        });
+
+        model.traverse((child) => {
+            if (child.isMesh) {
+                child.material = newMaterial;
+            }
+        });
       }
 
       function getModelVolume(geometry) {
@@ -649,7 +867,7 @@
             `;
 
         } else { // Fixed pricing
-            const rate = 0.18;
+            const rate = 0.20;
             materialPrice = weight * rate;
             breakdownHTML += `<small class="d-block text-muted">${weight.toFixed(2)}g @ RM${rate.toFixed(2)}/g = RM${materialPrice.toFixed(2)}</small>`;
         }
