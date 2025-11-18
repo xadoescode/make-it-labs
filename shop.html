@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Shop - MAKE-IT LABS</title>
+  <meta name="description" content="Explore our 3D printed products and finishing services. From custom keychains to professional electroplating, we bring your ideas to life.">
+  <meta name="keywords" content="3d printing, shop, keychains, custom products, finishing services, spray painting, electroplating">
+
+  <!-- Favicons -->
+  <link href="assets/img/makeitlabs-icon.ico" rel="icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- Custom CSS for Shop Page -->
+  <style>
+    :root {
+      --brand-color: #003053;
+      --brand-color-hover: #004a80;
+    }
+
+    .page-title {
+      padding: 40px 0;
+      background-color: #f8f9fa;
+    }
+
+    .how-to-order .step-card {
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease-in-out;
+      height: 100%;
+      background: #fff;
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+    }
+
+    .how-to-order .step-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .how-to-order .step-number {
+      position: absolute;
+      top: 15px;
+      left: 20px;
+      font-size: 4rem;
+      font-weight: 700;
+      color: #e9ecef;
+      z-index: 1;
+    }
+
+    .how-to-order .step-content {
+      position: relative;
+      z-index: 2;
+      margin-left: 40px;
+    }
+
+    .how-to-order .step-icon {
+      font-size: 3rem;
+      color: var(--accent-color);
+      margin-bottom: 15px;
+    }
+    
+    .how-to-order .card-title {
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+
+    .how-to-order .btn-whatsapp {
+      background-color: #25D366;
+      border-color: #25D366;
+    }
+
+    .how-to-order .btn-quote {
+      background-color: #252c5a;
+      border-color: #3d4993;
+    }
+
+    .how-to-order .btn-quote:hover {
+      background-color: #3337ae;
+      border-color: #3e4fb7;
+    }
+
+    .how-to-order .btn-whatsapp:hover {
+      background-color: #1DA851;
+      border-color: #1DA851;
+    }
+
+    .how-to-order .btn-email {
+      background-color: #858585;
+      border-color: #858585;
+      color: #fff;
+    }
+
+    .how-to-order .btn-email:hover {
+      background-color: #363636;
+      border-color: #262626;
+    }
+
+    .btn-whatsapp:focus,
+    .btn-whatsapp:focus-visible,
+    .btn-whatsapp:active:focus {
+      border-color: #25D366 !important;
+      outline: none !important;
+      box-shadow: none !important;
+    }
+
+    .how-to-order .btn {
+      margin-top: 15px;
+    }
+
+    .how-to-order .btn:focus,
+    .how-to-order .btn:focus-visible,
+    .btn:focus,
+    .btn:focus-visible {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+
+    .notes-section .alert {
+        margin-bottom: 20px;
+    }
+
+    .page-title .container {
+      position: relative;
+    }
+
+    .page-title .title-image {
+      position: absolute;
+      top: -80px;
+      right: -10px;
+      width: 330px;
+      opacity: 0.9;
+      z-index: 0;
+    }
+
+    /* Hero Section Styling */
+    .shop-hero {
+      padding: 100px;
+      background: url('assets/img/mkitlabblender.png') center center no-repeat;
+      background-size: cover;
+      background-blend-mode: overlay;
+      color: white;
+      text-align: center;
+    }
+
+    .shop-hero h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      color: #fff;
+    }
+
+    .shop-hero p {
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: #fff;
+    }
+
+    /* Section Styling */
+    .shop-section {
+      padding: 60px 0;
+    }
+
+    .shop-section .section-header {
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid var(--brand-color);
+      display: inline-block;
+    }
+    
+    .shop-section .section-header h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #303030;
+      margin: 0;
+    }
+
+    /* Product Card Styling */
+    .product-card {
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+      margin-bottom: 30px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+    }
+
+    .product-card .card-img-top {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    
+    .product-card .card-body {
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .product-card .card-title {
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #303030;
+      margin-bottom: 15px;
+    }
+
+    .product-card .card-text {
+      color: #666;
+      flex-grow: 1;
+    }
+
+    .product-card .price-range {
+      font-weight: 500;
+      color: var(--brand-color);
+      font-size: 1.1rem;
+      margin: 20px 0;
+    }
+
+    .btn-brand {
+      background-color: #f1f1f1;
+      color: #303030;
+      border: none;
+      border-radius: 50px;
+      padding: 10px 25px;
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-weight: 600;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+      align-self: flex-start;
+      box-shadow: none;
+    }
+
+    .btn-brand:hover, .btn-brand:focus {
+      background-color: #e0e0e0;
+      color: #222;
+      transform: scale(1.05);
+    }
+
+    /* Modal Styling */
+    #productModal .modal-dialog {
+      max-width: 950px; /* MODIFIED: Increased width */
+    }
+
+    #productModal .modal-body {
+      display: flex;
+      gap: 30px;
+      padding: 2rem; /* Added padding */
+    }
+
+    #productModal .modal-image-col {
+    flex: 0 0 40%;
+    display: flex;
+    align-items: flex-start;
+    }
+
+    #productModal .modal-image {
+      width: 100%;
+      max-height: 320px;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: opacity 0.4s ease-in-out;
+    }
+
+    #productModal .modal-details-col {
+      flex: 1;
+    }
+    
+    #productModal .modal-details-col h3 {
+        font-size: 2rem;
+        font-family: 'Open Sans', Arial, sans-serif;
+        font-weight: 700;
+        color: #303030;
+    }
+
+    #productModal .modal-subtitle {
+        font-size: 1.1rem;
+        font-family: 'Open Sans', Arial, sans-serif;
+        font-weight: 400;
+        color: #666;
+        margin-bottom: 15px;
+    }
+    
+    #productModal #modalProductDescription {
+        font-size: 1.1rem; /* MODIFIED: Increased font size */
+    }
+
+    #productModal .modal-price {
+        font-size: 1.75rem; /* MODIFIED: Increased font size */
+        font-weight: 700;
+        color: var(--brand-color);
+        margin-bottom: 20px;
+    }
+    
+    #productModal .form-label {
+        font-size: 1.1rem; /* MODIFIED: Increased font size */
+    }
+
+    .btn-whatsapp {
+        background-color: #25D366 !important; /* MODIFIED: WhatsApp Green */
+        border-color: #25D366 !important;
+        color: white !important;
+    }
+    .btn-whatsapp:hover,
+    .btn-whatsapp:focus,
+    .btn-whatsapp:focus-visible {
+        background-color: #128C7E !important; /* MODIFIED: Darker WhatsApp Green */
+        border-color: #128C7E !important;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    
+    /* Slideshow Section Styling */
+    #finishing-services {
+        padding: 0;
+    }
+    .slideshow-container {
+        position: relative;
+        height: 600px;
+        color: #212529; /* MODIFIED: Changed text color to black */
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .slideshow-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        transition: opacity 1s ease-in-out;
+        opacity: 0;
+    }
+    
+    .slideshow-slide.active {
+        opacity: 1;
+    }
+    
+    /* MODIFIED: Light overlay for text readability */
+    .slideshow-slide::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.75); /* MODIFIED: Changed to light overlay */
+    }
+
+    .slide-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        width: 80%;
+        max-width: 800px;
+    }
+
+    .slide-content h3 {
+        font-size: 3.2rem; /* MODIFIED: Increased font size */
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .slide-content h4 {
+        font-size: 1.4rem; /* MODIFIED: Increased font size */
+        font-weight: 700; /* MODIFIED: Made bold */
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .slide-content p {
+        font-size: 1.15rem;
+        margin-bottom: 30px;
+        text-align: justify;
+    }
+
+    /* Slideshow Navigation */
+    .slideshow-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 2rem;
+    }
+
+    .slideshow-nav button {
+        background: rgba(0, 0, 0, 0.1); /* MODIFIED: Color for light background */
+        border: 1px solid rgba(0, 0, 0, 0.2); /* MODIFIED: Color for light background */
+        color: #333; /* MODIFIED: Color for light background */
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .slideshow-nav button:hover {
+        background: rgba(0, 0, 0, 0.2); /* MODIFIED: Color for light background */
+    }
+
+    /* Slideshow Indicators */
+    .slideshow-indicators {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+    }
+
+    .slideshow-indicators .indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.3); /* MODIFIED: Color for light background */
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .slideshow-indicators .indicator.active {
+        background: var(--brand-color); /* MODIFIED: Changed to brand color */
+    }
+    /* Thumbnail selector under dropdown */
+  .product-thumbnails {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+    margin-bottom: 1rem; /* keeps WhatsApp button nicely below */
+  }
+
+  .thumbnail-item {
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    width: 72px;
+    height: 72px;
+  }
+
+  .thumbnail-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .thumbnail-item img:hover,
+  .thumbnail-item.active img {
+    box-shadow: 0 0 0 2px var(--brand-color, #003053);
+    transform: translateY(-2px);
+  }
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .shop-hero h1 {
+        font-size: 2.5rem;
+      }
+      .shop-section .section-header h2 {
+        font-size: 2rem;
+      }
+      #productModal .modal-body {
+        flex-direction: column;
+      }
+      .slideshow-container {
+          height: 500px;
+      }
+      .slide-content h3 {
+          font-size: 2.2rem; /* MODIFIED */
+      }
+       .slide-content h4 {
+          font-size: 1.2rem; /* MODIFIED */
+      }
+      .slideshow-nav {
+          padding: 0 1rem;
+      }
+      .slideshow-nav button {
+          width: 40px;
+          height: 40px;
+          font-size: 1.2rem;
+      }
+      .page-title .title-image {
+        display: none;
+      }
+      /* Thumbnail selector under dropdown */
+      /* Thumbnail selector under dropdown */
+
+
+
+
+
+    }
+  </style>
+</head>
+
+<body class="shop-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
+        <h1 class="sitename">MAKE-IT LABS</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html#hero">Home</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="index.html#portfolio">Portfolio</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li class="dropdown"><a href="#"><span>Get Started</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="howto.html">How to Order</a></li>
+              <li><a href="filaments.html">Filaments</a></li>
+              <li><a href="calculator.html">Pricing List & Calculator</a></li>
+              <li><a href="slicer.html">Instant Quotation <sup> NEW!</sup></a></li>
+              <li><a href="blog.html">Blog</a></li>
+            </ul>
+          </li>
+        </ul>
+        <i class="mobile-nav-toggle d-lg-none bi bi-list"></i>
+      </nav>
+
+      <a class="btn-getstarted" href="https://makeitlabs.wasap.my" target="_blank">Order Now!</a>
+
+    </div>
+  </header>
+
+  <br>
+  <br>
+  <main class="main">
+
+    <br>
+    <!-- Hero Section -->
+    <section class="shop-hero">
+      <div class="container" data-aos="fade-up">
+        <h1>Shop</h1>
+        <p>Explore our products & services</p>
+      </div>
+    </section>
+    <!-- End Hero Section -->
+
+    <br>
+    <br>
+    <br>
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            
+            <h4>We handle 3D printing orders personally to ensure quality.</h4>
+            <br>
+            <h4>Please reach us below for quotes or custom orders!</h4>
+            <br>
+            <a href="https://makeitlabs.wasap.my" class="btn btn-primary btn-whatsapp" target="_blank"><i class="bi bi-whatsapp"></i> WhatsApp Us</a>
+            <a href="mailto:makeitlabs10@gmail.com" class="btn btn-secondary btn-email"><i class="bi bi-envelope"></i> Email Us</a>
+          </div>
+        </div>
+        <img src="assets/img/modelphotos/spider.png" alt="Decorative Spider" class="title-image d-none d-lg-block">
+      </div>
+    </div><!-- End Page Title -->
+    
+    <!-- Premade Keychains Section -->
+    <section id="premade-keychains" class="shop-section">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <h2>Premade Keychains</h2>
+        </div>
+        <div class="row">
+          <!-- Card 1 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="product-card">
+              <img src="assets/img/modelphotos/skelandendermankeychain.jpg" class="card-img-top" alt="Articulated Creatures">
+              <div class="card-body">
+                <h5 class="card-title">Gaming themed 🎮</h5>
+                <p class="card-text">Bold gaming-inspired keychains featuring iconic characters, perfect for fans and ready to ship!</p>
+                <p class="price-range"><strong>Price:</strong> RM1 - RM5</p>
+                <button type="button" class="btn-brand" data-bs-toggle="modal" data-bs-target="#productModal" data-category="articulated">
+                  View Options <i class="bi bi-eye"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="product-card">
+              <img src="assets/img/modelphotos/threenfc.jpg" class="card-img-top" alt="Themed Collections">
+              <div class="card-body">
+                <h5 class="card-title">NFC Tag Collections 📳</h5>
+                <p class="card-text">Stylish NFC tags for quick sharing and smart shortcuts with just a tap.</p>
+                <p class="price-range"><strong>Price:</strong> RM4 - RM10</p>
+                <button type="button" class="btn-brand" data-bs-toggle="modal" data-bs-target="#productModal" data-category="themed">
+                  View Options <i class="bi bi-eye"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="product-card">
+              <img src="assets/img/modelphotos/fifakeychain2.jpg" class="card-img-top" alt="Utility Keychains">
+              <div class="card-body">
+                <h5 class="card-title">Others / Lifestyle Prints ✨</h5>
+                <p class="card-text">Fun and unique 3D-printed accessories designed to brighten your desk, room, or everyday carry.</p>
+                <p class="price-range"><strong>Price:</strong> RM1 - RM5</p>
+                 <button type="button" class="btn-brand" data-bs-toggle="modal" data-bs-target="#productModal" data-category="utility">
+                  View Options <i class="bi bi-eye"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Premade Keychains Section -->
+
+    <!-- 3D Printed Objects Section -->
+    <section id="3d-objects" class="shop-section bg-light">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <h2>3D Printed Objects</h2>
+        </div>
+        <div class="row">
+          <!-- Card 1 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="product-card">
+              <img src="assets/img/modelphotos/jewelry-stand3.jpg" class="card-img-top" alt="3D Printed Object">
+              <div class="card-body">
+                <h5 class="card-title">Jewelry holder</h5>
+                <p class="card-text">A unique decorative pieces to place your classy jewelries.</p>
+                <p class="price-range"><strong>Price:</strong> RM20</p>
+                <a href="https://wa.me/60176506278" target="_blank" class="btn-brand">Inquire Now <i class="bi bi-whatsapp"></i></a>
+              </div>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="product-card">
+              <img src="https://placehold.co/600x400/003053/FFFFFF?text=Stay+tuned!" class="card-img-top" alt="3D Printed Object">
+              <div class="card-body">
+                <h5 class="card-title">Stay tuned!</h5>
+                <p class="card-text">Stay tuned!</p>
+                <p class="price-range"><strong>Price:</strong> RM0</p>
+                <a href="https://wa.me/60176506278" target="_blank" class="btn-brand">Get a Quote <i class="bi bi-whatsapp"></i></a>
+              </div>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="product-card">
+              <img src="https://placehold.co/600x400/003053/FFFFFF?text=Stay+tuned!" class="card-img-top" alt="3D Printed Object">
+              <div class="card-body">
+                <h5 class="card-title">Stay tuned!</h5>
+                <p class="card-text">Stay tuned!</p>
+                <p class="price-range"><strong>Price:</strong> RM0</p>
+                <a href="https://wa.me/60176506278" target="_blank" class="btn-brand">Inquire Now <i class="bi bi-whatsapp"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End 3D Printed Objects Section -->
+    
+    <!-- Custom Keychains Section -->
+    <section id="custom-keychains" class="shop-section">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <h2>Custom/Personalized Keychains</h2>
+        </div>
+        <div class="row">
+          <!-- Card 1 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="product-card">
+              <img src="assets/img/modelphotos/namekeychain.jpg" class="card-img-top" alt="Custom Keychain">
+              <div class="card-body">
+                <h5 class="card-title">Name & Text Keychains</h5>
+                <p class="card-text">Personalize with your name, initials, or a special word. Choose from various fonts and colors.</p>
+                <p class="price-range"><strong>Price:</strong> Starts at RM3</p>
+                <a href="https://wa.me/60176506278" target="_blank" class="btn-brand">Start Customizing <i class="bi bi-whatsapp"></i></a>
+              </div>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="product-card">
+              <img src="assets/img/modelphotos/prockeychain.jpg" class="card-img-top" alt="Custom Keychain">
+              <div class="card-body">
+                <h5 class="card-title">Logo Keychains</h5>
+                <p class="card-text">Perfect for businesses, clubs, or events. We can turn your logo into a high-quality keychain. Bulk discounts available!</p>
+                <p class="price-range"><strong>Price:</strong> Starts at RM1.50</p>
+                <a href="https://wa.me/60176506278" target="_blank" class="btn-brand">Get a Quote <i class="bi bi-whatsapp"></i></a>
+              </div>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="product-card">
+              <img src="assets/img/modelphotos/baloondog.jpg" class="card-img-top" alt="Custom Keychain">
+              <div class="card-body">
+                <h5 class="card-title">Design Your Own</h5>
+                <p class="card-text">Have a unique idea? Work with us to create a completely custom keychain from scratch.</p>
+                <p class="price-range"><strong>Price:</strong> Starts at RM3</p>
+                <a href="https://wa.me/60176506278" target="_blank" class="btn-brand">Start Designing <i class="bi bi-whatsapp"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Custom Keychains Section -->
+
+    <!-- Finishing Services Slideshow Section -->
+    <section id="finishing-services" class="shop-section bg-light">
+        <div class="container" data-aos="fade-up">
+            <div class="section-header">
+              <br>
+                <h2>Finishing Services</h2>
+            </div>
+        </div>
+        <div class="slideshow-container" data-aos="fade-up" data-aos-delay="100">
+            <!-- Slides will be injected by JS -->
+            <div id="slideshow-content-wrapper" class="slide-content">
+                <h3 id="slide-title"></h3>
+                <h4 id="slide-subtitle"></h4>
+                <br>
+                <br>
+                <p id="slide-description"></p>
+                <br>
+                <br>
+                <br>
+                <a href="https://wa.me/60176506278" target="_blank" class="btn-brand">Inquire Now <i class="bi bi-whatsapp"></i></a>
+            </div>
+            <div class="slideshow-nav">
+                <button id="prev-slide" aria-label="Previous Slide">&lt;</button>
+                <button id="next-slide" aria-label="Next Slide">&gt;</button>
+            </div>
+            <div id="slideshow-indicators" class="slideshow-indicators">
+                <!-- Indicators will be injected by JS -->
+            </div>
+        </div>
+    </section>
+    <!-- End Finishing Services Section -->
+
+  </main>
+  
+    <!-- Product Details Modal -->
+  <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="productModalLabel">Product Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-image-col">
+            <img src="https://placehold.co/600x600/EEEEEE/AAAAAA?text=Loading..." alt="Product Image" id="modalProductImage" class="modal-image">
+          </div>
+          <div class="modal-details-col">
+            <h3 id="modalProductTitle">Product Title</h3>
+            <p class="modal-subtitle" id="modalProductSubtitle">Product Subtitle</p>
+            <p id="modalProductDescription">Product description goes here.</p>
+            <p class="modal-price" id="modalProductPrice">RM0.00</p>
+            <div class="mb-3">
+              <label for="productSelector" class="form-label"><strong>Select an item:</strong></label>
+              <select class="form-select" id="productSelector"></select>
+            </div>
+
+            <!-- Thumbnail strip -->
+            <div id="productThumbnails" class="product-thumbnails"></div>
+
+             <a href="https://wa.me/60176506278" target="_blank" class="btn-brand btn-whatsapp">Order on WhatsApp <i class="bi bi-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <footer id="footer" class="footer position-relative light-background">
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-5 col-md-12 footer-about">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span class="sitename">MAKE-IT LABS</span>
+          </a>
+          <p>See it. Dream it. Make it.</p>
+          <div class="social-links d-flex mt-4">
+            <a href=""><i class="bi bi-linkedin"></i></a>
+            <a href="https://www.instagram.com/make.it.labs?igsh=b3UxZDVvbWgzcm1h" target="_blank"><i class="bi bi-instagram"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About us</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="index.html#portfolio">Portfolio</a></li>
+            <li><a href="terms.html">Terms & Conditions</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a>3D Printing</a></li>
+            <li><a>3D Modelling & Design</a></li>
+            <li><a>Consultations</a></li>
+            <li><a>Engineering Prototypes</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+          <h4>Contact Us</h4>
+          <p>Universiti Tenaga Nasional, Kajang 43000</p>
+          <p>Selangor, Malaysia</p>
+          <p class="mt-4"><strong>Phone:</strong> <span>+60 17-650 6278</span></p>
+          <p><strong>Email:</strong> <span>makeitlabs10@gmail.com</span></p>
+          <p><strong>SSM No.:</strong> <span>202503175096 (KT0594227-H)</span></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+  
+  <!-- Custom JS for Page -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    // --- MODAL DATA ---
+    const keychainData = {
+      articulated: {
+        title: "Articulated Creatures",
+        items: [
+          { id: 'dragon', name: 'Articulated Dragon', subtitle: 'A mythical beast for your keys.', description: 'This flexible dragon keychain is printed in place and has amazing articulation. A perfect fidget toy.', price: 'RM25', image: 'https://placehold.co/600x600/ff6347/FFFFFF?text=Dragon' },
+          { id: 'octopus', name: 'Cute Octopus', subtitle: 'An eight-legged friend.', description: 'A charming and wiggly octopus that will bring a smile to your face every time you see it.', price: 'RM15', image: 'https://placehold.co/600x600/4682b4/FFFFFF?text=Octopus' },
+          { id: 'shark', name: 'Flexi Shark', subtitle: 'The terror of the deep.', description: 'A cool, articulated shark model that moves like the real thing. Watch out for its bite!', price: 'RM20', image: 'https://placehold.co/600x600/708090/FFFFFF?text=Shark' }
+        ]
+      },
+      themed: {
+        title: "Themed Collections",
+        items: [
+          { id: 'minecraft', name: 'Minecraft Creeper', subtitle: 'Sssss-BOOM!', description: 'Bring the iconic Minecraft Creeper to your keychain collection. Just be careful it doesn\'t explode!', price: 'RM18', image: 'https://placehold.co/600x600/228b22/FFFFFF?text=Creeper' },
+          { id: 'star-wars', name: 'Millennium Falcon', subtitle: 'She may not look like much...', description: 'The fastest hunk of junk in the galaxy, now in a pocket-friendly size. Perfect for any Star Wars fan.', price: 'RM28', image: 'https://placehold.co/600x600/a9a9a9/FFFFFF?text=Falcon' },
+          { id: 'pokemon', name: 'Pokeball', subtitle: 'Gotta Catch \'Em All!', description: 'A classic Pokeball keychain to show off your love for Pokemon. What\'s inside? That\'s a secret.', price: 'RM15', image: 'https://placehold.co/600x600/ff0000/FFFFFF?text=Pokeball' }
+        ]
+      },
+      utility: {
+        title: "Utility Keychains",
+        items: [
+          { id: 'phone-stand', name: 'Phone Stand Keychain', subtitle: 'Watch videos anywhere.', description: 'A compact and clever keychain that unfolds into a sturdy stand for your smartphone.', price: 'RM15', image: 'https://placehold.co/600x600/dda0dd/FFFFFF?text=Stand' },
+          { id: 'trolley-coin', name: 'Shopping Trolley Coin', subtitle: 'Never search for a coin again.', description: 'A handy token that fits most shopping trolleys, always there when you need it.', price: 'RM12', image: 'https://placehold.co/600x600/ffd700/FFFFFF?text=Coin' },
+          { id: 'bag-hook', name: 'Bag Hook', subtitle: 'Keep your bag off the floor.', description: 'A portable hook to hang your bag securely from any table or counter.', price: 'RM20', image: 'https://placehold.co/600x600/8a2be2/FFFFFF?text=Hook' }
+        ]
+      }
+    };
+
+    // --- MODAL + THUMBNAILS LOGIC ---
+    const productModal = document.getElementById('productModal');
+if (productModal) {
+  const modalImage = document.getElementById('modalProductImage');
+  const modalTitle = document.getElementById('modalProductTitle');
+  const modalSubtitle = document.getElementById('modalProductSubtitle');
+  const modalDescription = document.getElementById('modalProductDescription');
+  const modalPrice = document.getElementById('modalProductPrice');
+  const productSelector = document.getElementById('productSelector');
+  const thumbnailContainer = document.getElementById('productThumbnails');
+
+  const updateModalContent = (category, itemId) => {
+    const item = keychainData[category].items.find(i => i.id === itemId);
+    if (!item) return;
+
+    // image fade effect
+    modalImage.style.opacity = '0';
+    setTimeout(() => {
+      modalImage.src = item.image;
+      modalImage.alt = item.name;
+      modalImage.style.opacity = '1';
+    }, 300);
+
+    modalTitle.textContent = item.name;
+    modalSubtitle.textContent = item.subtitle;
+    modalDescription.textContent = item.description;
+    modalPrice.textContent = item.price;
+  };
+
+  const highlightThumbnails = (selectedId) => {
+    if (!thumbnailContainer) return;
+    const thumbs = thumbnailContainer.querySelectorAll('.thumbnail-item');
+    thumbs.forEach(t => {
+      t.classList.toggle('active', t.dataset.itemId === selectedId);
+    });
+  };
+
+  const buildThumbnails = (category, items, initialId) => {
+  if (!thumbnailContainer) return;
+
+    thumbnailContainer.innerHTML = '';
+
+    items.forEach(item => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'thumbnail-item';
+      btn.dataset.itemId = item.id;
+
+      // Only the image (no label)
+      btn.innerHTML = `
+        <img src="${item.image}" alt="${item.name}">
+      `;
+
+      btn.addEventListener('click', () => {
+        productSelector.value = item.id;
+        updateModalContent(category, item.id);
+        highlightThumbnails(item.id);
+      });
+
+      thumbnailContainer.appendChild(btn);
+    });
+
+    if (initialId) {
+      highlightThumbnails(initialId);
+    }
+  };
+
+  productModal.addEventListener('show.bs.modal', (event) => {
+    const button = event.relatedTarget;
+    const category = button.getAttribute('data-category');
+    const categoryData = keychainData[category];
+
+    document.getElementById('productModalLabel').textContent = categoryData.title;
+    productSelector.innerHTML = '';
+
+    // build dropdown options
+    categoryData.items.forEach(item => {
+      const option = document.createElement('option');
+      option.value = item.id;
+      option.textContent = item.name;
+      productSelector.appendChild(option);
+    });
+
+    // set initial item + thumbnails
+    if (categoryData.items.length > 0) {
+      const firstId = categoryData.items[0].id;
+      productSelector.value = firstId;
+      updateModalContent(category, firstId);
+      buildThumbnails(category, categoryData.items, firstId);
+    }
+
+    // sync dropdown -> thumbnails
+    productSelector.onchange = () => {
+      const selectedId = productSelector.value;
+      updateModalContent(category, selectedId);
+      highlightThumbnails(selectedId);
+    };
+  });
+}
+
+    // --- SLIDESHOW LOGIC ---
+    const slideshowData = [
+        {
+          title: 'Sandpaper Finishing',
+          subtitle: 'For a Flawless Surface',
+          description:
+            'We meticulously sand your 3D prints by hand, working through multiple grits of sandpaper to remove layer lines and imperfections. This process results in a smooth, professional surface ready for painting or display.',
+          image: 'assets/img/modelphotos/sandpapering.jpeg'
+        },
+        {
+          title: 'Painting',
+          subtitle: 'Vibrant & Colourful Pigments',
+          description:
+            'Add a stunning colors to your models, especially for figurines!. Using high-quality primers and paints, we provide a durable and attractive finish.',
+          image: 'assets/img/modelphotos/painting.jpg'
+        },
+        {
+          title: 'Electroplating',
+          subtitle: 'Premium Metal Finish',
+          description:
+            'Transform your plastic prints with a real metal coating. Our electroplating service adds a luxurious and durable layer of copper, zinc, or nickel, giving your item a significant increase in strength and a premium metallic appearance.',
+          image: 'assets/img/modelphotos/electroplating.png'
+        }
+      ];
+
+      const slideshowContainer = document.querySelector('.slideshow-container');
+
+      if (slideshowContainer) {
+        const slideTitle = document.getElementById('slide-title');
+        const slideSubtitle = document.getElementById('slide-subtitle');
+        const slideDescription = document.getElementById('slide-description');
+        const indicatorsContainer = document.getElementById('slideshow-indicators');
+        const prevBtn = document.getElementById('prev-slide');
+        const nextBtn = document.getElementById('next-slide');
+
+        const slides = [];
+
+        // Create slides and indicators
+        slideshowData.forEach((slide, index) => {
+          const slideDiv = document.createElement('div');
+          slideDiv.className = 'slideshow-slide';
+          slideDiv.style.backgroundImage = `url(${slide.image})`;
+
+          // Insert slides as the first children so the text/content sits on top
+          slideshowContainer.insertBefore(slideDiv, slideshowContainer.firstChild);
+          slides.push(slideDiv);
+
+          const indicator = document.createElement('div');
+          indicator.className = 'indicator';
+          indicator.dataset.index = index;
+          indicatorsContainer.appendChild(indicator);
+        });
+
+        const indicators = indicatorsContainer.querySelectorAll('.indicator');
+        let currentSlide = 0;
+        let slideIntervalId;
+
+        const showSlide = (index) => {
+          // Update text content
+          slideTitle.textContent = slideshowData[index].title;
+          slideSubtitle.textContent = slideshowData[index].subtitle;
+          slideDescription.textContent = slideshowData[index].description;
+
+          // Update slide visibility
+          slides.forEach((s, i) => {
+            s.classList.toggle('active', i === index);
+          });
+
+          // Update indicators
+          indicators.forEach((ind, i) => {
+            ind.classList.toggle('active', i === index);
+          });
+
+          currentSlide = index;
+        };
+
+        const goToNext = () => {
+          const nextIndex = (currentSlide + 1) % slideshowData.length;
+          showSlide(nextIndex);
+        };
+
+        const goToPrev = () => {
+          const prevIndex =
+            (currentSlide - 1 + slideshowData.length) % slideshowData.length;
+          showSlide(prevIndex);
+        };
+
+        const startAutoScroll = () => {
+          stopAutoScroll();
+          slideIntervalId = setInterval(goToNext, 7000);
+        };
+
+        const stopAutoScroll = () => {
+          if (slideIntervalId) clearInterval(slideIntervalId);
+        };
+
+        // Button events
+        if (nextBtn) {
+          nextBtn.addEventListener('click', () => {
+            stopAutoScroll();
+            goToNext();
+            startAutoScroll();
+          });
+        }
+
+        if (prevBtn) {
+          prevBtn.addEventListener('click', () => {
+            stopAutoScroll();
+            goToPrev();
+            startAutoScroll();
+          });
+        }
+
+        // Indicator click
+        indicators.forEach((indicator) => {
+          indicator.addEventListener('click', (e) => {
+            stopAutoScroll();
+            const idx = parseInt(e.currentTarget.dataset.index, 10);
+            showSlide(idx);
+            startAutoScroll();
+          });
+        });
+
+        // Initialise
+        showSlide(0);
+        startAutoScroll();
+      }
+    // --- MAKE PREMADE KEYCHAIN CARDS CLICKABLE ---
+    const premadeCards = document.querySelectorAll('#premade-keychains .product-card');
+
+    premadeCards.forEach(card => {
+      card.style.cursor = 'pointer';
+
+      card.addEventListener('click', (e) => {
+        // If the user actually clicked the button, let the button handle it
+        if (e.target.closest('.btn-brand')) return;
+
+        // Otherwise, simulate a click on the "View Options" button inside this card
+        const triggerBtn = card.querySelector('.btn-brand[data-bs-toggle="modal"]');
+        if (triggerBtn) {
+          triggerBtn.click();
+        }
+      });
+    });
+
+  });
+</script>
+
+
+</body>
+
+</html>

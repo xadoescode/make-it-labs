@@ -24,13 +24,17 @@ function calculatePrice() {
             201g+ @ RM0.15/g = RM${tier3.toFixed(2)}
         `;
     } else if (filamentType === "pla_silk") {
-        // Fixed price: RM0.20/g
-        total_price = weight * 0.20;
-        breakdownText = `Fixed RM0.20/g x ${weight}g = RM${total_price.toFixed(2)}`;
-    } else if (filamentType === "multi_colour") {
         // Fixed price: RM0.18/g
         total_price = weight * 0.18;
         breakdownText = `Fixed RM0.18/g x ${weight}g = RM${total_price.toFixed(2)}`;
+    } else if (filamentType === "pla_wood") {
+        // Fixed price: RM0.18/g
+        total_price = weight * 0.18;
+        breakdownText = `Fixed RM0.18/g x ${weight}g = RM${total_price.toFixed(2)}`;
+    } else if (filamentType === "multi_colour") {
+        // Fixed price: RM0.17/g
+        total_price = weight * 0.17;
+        breakdownText = `Fixed RM0.17/g x ${weight}g = RM${total_price.toFixed(2)}`;
     }
 
     document.getElementById("result").innerHTML = `Total Price: RM${total_price.toFixed(2)}`;
